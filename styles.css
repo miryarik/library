@@ -1,7 +1,10 @@
 html {
-    --header-bg-clr: rgb(27, 27, 27);
+    --card-bg-clr: rgb(15, 15, 15);
     --text-white: aliceblue;
-    --accent-color: rgb(40, 40, 40);
+    --border-white: rgb(135, 135, 135);
+    --accent-color: rgb(30, 30, 30);
+    --header-bg-clr: rgb(0, 0, 0);
+    --shadow-light: 0px 0px 12px rgb(110, 110, 110);
 }
 
 body {
@@ -44,8 +47,15 @@ body {
         background-color: var(--accent-color);
         color: var(--text-white);
 
-        border: 2px solid var(--text-white);
+        border: 1px solid var(--border-white);
         border-radius: 12px;
+
+        &:hover,
+        &:focus {
+            border-color: var(--text-white);
+            box-shadow: var(--shadow-light);
+            cursor: pointer;
+        }
 
     }
 }
@@ -56,15 +66,55 @@ body {
     padding: 50px 45px;
 
     display: grid;
-    grid-template-rows: repeat(auto-fit, minmax(300px, 0.3fr));
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-rows: repeat(3, 300px);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 38px;
 
     background-color: var(--accent-color);
 
 
     & .card {
-        background-color: var(--text-white);
+        background-color: var(--card-bg-clr);
+
+        border: 1px solid var(--border-white);
+        border-radius: 12px;
+
+        color: var(--text-white);
+        
+        display: grid;
+        grid-template: 3fr 1fr 1fr / 1fr 1fr;
+
+
+        &:hover,
+        &:focus {
+            border-color: var(--text-white);
+            box-shadow: var(--shadow-light);
+            cursor: pointer;
+        }
+
+
+        & h2 {
+            grid-area: 1 / 1 / 2 / -1;
+            justify-self: center;
+            align-self: center;
+            
+            padding: 50px 75px;
+
+            border-bottom: 1px solid var(--border-white);
+
+        }
+
+        & h3 {
+            grid-area: 2 / 1 / 3 / 3;
+            justify-self: center;
+            align-self: center;
+        }
+
+        & p {
+            justify-self: center;
+            align-self: center;
+        }
+
     }
 }
 
