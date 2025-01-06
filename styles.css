@@ -50,7 +50,7 @@ body {
         background-color: var(--accent-color);
         color: var(--text-white);
 
-        border: 1px solid var(--border-white);
+        border: 2px solid var(--border-white);
         border-radius: 12px;
 
         &:hover,
@@ -124,8 +124,8 @@ body {
 
 
 dialog.add-book-modal {
-    width: max(40vw, 300px);
-    height: 40vh;
+    width: max(35vw, 300px);
+    height: 400px;
 
     margin: auto;
 
@@ -136,8 +136,17 @@ dialog.add-book-modal {
 
     box-shadow: var(--shadow-light);
 
+    justify-items: center;
+    align-content: center;
+
     &::backdrop {
         backdrop-filter: blur(3px);
     }
 
+    & > div {
+        width: 80%;
+
+        justify-items: center;
+
+    }
 }

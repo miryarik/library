@@ -32,11 +32,27 @@ function addBookToLibrary(book) {
 function removeBookFromLibrary(book) {
     // add book to myLibrary array
     myLibrary.pop(book);
-
+    
     // sync display
     displayBooks();
 }
 
+
+function displayBooks() {
+
+    // remove all cards
+    cardsDiv.innerHTML = '';
+    
+    // display each book on page
+    myLibrary.forEach(book => {
+        // create a card for each book
+        const card = makeBookCard(book);
+        
+        // append card to cards
+        cardsDiv.appendChild(card);
+    });
+
+}
 
 
 function makeBookCard(book) {
@@ -70,23 +86,6 @@ function makeBookCard(book) {
 }
 
 
-function displayBooks() {
-
-    // remove all cards
-    cardsDiv.innerHTML = '';
-    
-    // display each book on page
-    myLibrary.forEach(book => {
-        // create a card for each book
-        const card = makeBookCard(book);
-        
-        // append card to cards
-        cardsDiv.appendChild(card);
-    });
-
-}
-
-
 document.addEventListener("DOMContentLoaded", (event) => {
     
     // display books from array
@@ -94,18 +93,34 @@ document.addEventListener("DOMContentLoaded", (event) => {
     
     // modal for adding new book
     const addBookModal = document.querySelector('dialog.add-book-modal');
-    
+
+
     // add book button
     const addBookBtn = document.querySelector('#add-book-btn');
     addBookBtn.addEventListener('click', () => {
         addBookModal.showModal();
     });
 
-    // cancel button
-    const cancelModal = document.querySelector('dialog #cancel');
-    cancelModal.addEventListener('click', () => {
+
+    // form for new book
+    const submitBtn = document.querySelector('#submit-book-btn');
+    submitBtn.addEventListener('click', (event) => {
+        // get entered inputs
+        const newBookTitle = addBookModal.querySelector('input#title').value;
+        const newBookAuthor = addBookModal.querySelector('input#author').value;
+        const newBookPages = addBookModal.querySelector('input#pages').value;
+        const newBookRead = addBookModal.querySelector('input#read').checked;
+        
+        console.log(newBookRead)
+
+        // make a new book from the inputs
+        const newBook = new Book(newBookTitle, newBookAuthor, newBookPages, newBookRead);
+        addBookToLibrary(newBook);
+
+        // close modal
         addBookModal.close();
     });
+
 
 });
   
