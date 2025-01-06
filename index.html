@@ -9,9 +9,35 @@
     <script src="./script.js" defer></script>
 </head>
 <body>
+    <dialog class="add-book-modal">
+        <div>
+            <form method="dialog">
+                <div class="ipt-title">
+                    <input type="text" name="title" id="title" placeholder="Title">
+                </div>
+                
+                <div class="ipt-author">
+                    <input type="text" name="author" id="author" placeholder="Author">
+                </div>
+                
+                <div class="ipt-pages">
+                    <input type="number" name="pages" id="pages" placeholder="Number of Pages" min="0">
+                </div>
+                
+                <div class="ipt-read">
+                    <input type="checkbox" name="read" id="read">
+                </div>
+
+                <div class="ipt-read">
+                    <button id="cancel">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+
     <div class="header">
         <h1>Library</h1>
-        <button>Add Book</button>
+        <button id="add-book-btn">Add Book</button>
     </div>
     <div class="cards">
     </div>

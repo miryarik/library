@@ -9,7 +9,7 @@ function Book(name, author, pages, read) {
 
 // sample books
 const book0 = new Book('Water', 'Katara', 199, false);
-const book1 = new Book('Air', 'Aang', 199, false);
+const book1 = new Book('Air - The Element of Breath', 'Aang', 199, false);
 const book2 = new Book('Earth', 'Toph', 199, false);
 const book3 = new Book('Fire', 'Zuko', 199, false);
 
@@ -86,7 +86,26 @@ function displayBooks() {
 
 }
 
+
 document.addEventListener("DOMContentLoaded", (event) => {
+    
+    // display books from array
     displayBooks();
+    
+    // modal for adding new book
+    const addBookModal = document.querySelector('dialog.add-book-modal');
+    
+    // add book button
+    const addBookBtn = document.querySelector('#add-book-btn');
+    addBookBtn.addEventListener('click', () => {
+        addBookModal.showModal();
+    });
+
+    // cancel button
+    const cancelModal = document.querySelector('dialog #cancel');
+    cancelModal.addEventListener('click', () => {
+        addBookModal.close();
+    });
+
 });
   
