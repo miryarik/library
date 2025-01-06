@@ -88,12 +88,12 @@ function makeBookCard(book) {
 
 document.addEventListener("DOMContentLoaded", (event) => {
     
-    // display books from array
-    displayBooks();
-    
     // modal for adding new book
     const addBookModal = document.querySelector('dialog.add-book-modal');
 
+    // display books from array
+    displayBooks();
+    
 
     // add book button
     const addBookBtn = document.querySelector('#add-book-btn');
@@ -102,23 +102,40 @@ document.addEventListener("DOMContentLoaded", (event) => {
     });
 
 
-    // form for new book
+    // adding new book and handling form behaviour on submit
     const submitBtn = document.querySelector('#submit-book-btn');
-    submitBtn.addEventListener('click', (event) => {
+    submitBtn.addEventListener('click', () => {
         // get entered inputs
-        const newBookTitle = addBookModal.querySelector('input#title').value;
-        const newBookAuthor = addBookModal.querySelector('input#author').value;
-        const newBookPages = addBookModal.querySelector('input#pages').value;
-        const newBookRead = addBookModal.querySelector('input#read').checked;
+        let newBookTitle = addBookModal.querySelector('input#title').value;
+        let newBookAuthor = addBookModal.querySelector('input#author').value;
+        let newBookPages = addBookModal.querySelector('input#pages').value;
+        let newBookRead = addBookModal.querySelector('input#read').checked;
         
-        console.log(newBookRead)
 
-        // make a new book from the inputs
-        const newBook = new Book(newBookTitle, newBookAuthor, newBookPages, newBookRead);
-        addBookToLibrary(newBook);
+        // valid input must have title
+        if (newBookTitle !== '') {
 
-        // close modal
+            // handle pages input
+            newBookPages = newBookPages == 0 ? 0 : newBookPages;
+
+            // make a new book from the inputs
+            const newBook = new Book(newBookTitle, newBookAuthor, newBookPages, newBookRead);
+            addBookToLibrary(newBook);
+    
+            // close modal, reset form
+            addBookModal.close();
+            addBookModal.querySelector('form').reset();
+        }
+
+    });
+
+
+    // handling form behaviour on cancelation
+    const cancelBtn = addBookModal.querySelector('button#cancel');
+    cancelBtn.addEventListener('click', () => {
+        // close modal, reset form
         addBookModal.close();
+        addBookModal.querySelector('form').reset();
     });
 
 
