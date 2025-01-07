@@ -5,6 +5,9 @@ html {
     --accent-color: rgb(30, 30, 30);
     --header-bg-clr: rgb(0, 0, 0);
     --shadow-light: 0px 0px 20px rgb(110, 110, 110);
+    --text-secondary: rgb(165, 165, 165);
+    --delete-clr: #EA4335;
+    --read-clr: #34A853;
 }
 
 body {
@@ -17,6 +20,8 @@ body {
         'cards';
 
     position: relative;
+
+    font-family: Helvetica, Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .header {
@@ -86,37 +91,126 @@ body {
         color: var(--text-white);
         
         display: grid;
-        grid-template: 3fr 1fr 1fr / 1fr 1fr;
+        grid-template: 3fr 2fr / 1fr;
+        grid-template-areas: 
+            "info"
+            "options";
+        gap: 10px;
 
 
         &:hover,
         &:focus {
             border-color: var(--text-white);
             box-shadow: var(--shadow-light);
-            cursor: pointer;
         }
 
 
-        & h2 {
-            grid-area: 1 / 1 / 2 / -1;
-            justify-self: center;
-            align-self: center;
+        & .info {
+            display: grid;
+            grid-template: 2fr 1fr 1fr / 1fr;
+            grid-template-areas:
+                "title"
+                "author"
+                "pages";
+            gap: 10px;
+            
+            padding: 30px;
 
-            text-align: center;
+            & .title {
+                grid-area: title;
+                justify-self: start;
+    
+                font-size: 1rem;
+                
+            }
+    
+            & .author {
+                grid-area: author;
+    
+                font-size: 1rem;
+                
+                color: var(--text-secondary);
+                
+            }
+    
+            & .pages {
+                grid-area: pages;
+                
+                font-size: 14px;
 
-            border-bottom: 1px solid var(--border-white);
-
+                color: var(--text-secondary);
+            }
         }
 
-        & h3 {
-            grid-area: 2 / 1 / 3 / 3;
-            justify-self: center;
-            align-self: center;
-        }
+        & .options {
+            display: grid;
+            grid-template: 1fr / 1fr 1fr;
+            grid-template-areas:
+                "delete read";
 
-        & p {
-            justify-self: center;
-            align-self: center;
+            
+            border-top: 2px solid var(--border-white) ;            
+
+
+            & > .delete {
+                width: 100%;
+                height: 100%;
+
+                border-bottom-left-radius: 10px;
+                border-right: 2px solid var(--border-white);
+
+                background-color: var(--delete-clr);
+
+                
+                & button {
+                    border: none;
+                    
+                    width: 100%;
+                    height: 100%;
+                    
+                    background-color: transparent;
+
+                    color: var(--text-white);
+
+                    font-weight: bold;
+                    
+                    &:hover,
+                    &:focus {
+                        cursor: pointer;
+                    }
+                }
+
+           }
+
+           & > .read {
+                width: 100%;
+                height: 100%;
+
+                border-bottom-right-radius: 10px;
+
+                background-color: var(--read-clr);
+
+                & button {
+                    border: none;
+                    
+                    width: 100%;
+                    height: 100%;
+
+                    background-color: transparent;
+
+                    color: var(--text-white);
+
+                    font-weight: bold;
+
+                    &:hover,
+                    &:focus {
+                        cursor: pointer;
+                    }
+
+                }
+
+            }
+
         }
 
     }

@@ -40,7 +40,7 @@ function removeBookFromLibrary(book) {
 
 function displayBooks() {
 
-    // remove all cards
+    // remove all cards - Uncomment below Here
     cardsDiv.innerHTML = '';
     
     // display each book on page
@@ -59,28 +59,48 @@ function makeBookCard(book) {
     const card = document.createElement('div');
     card.classList.add('card');
 
-    // create h3 and assign it title
-    const title = document.createElement('h2');
-    title.innerText = book.name;
+    // create info div -> title, author, p
+    const info = document.createElement('div');
+    info.classList.add('info');
 
-    // create h2 and assign it author name
-    const author = document.createElement('h3');
-    author.innerText = book.author;
 
-    // create a p and assign it pages as string
-    const pages = document.createElement('p');
-    pages.classList.add('pages');
-    pages.innerText = `${book.pages} pages`;
+    // title
+    const titleDiv = document.createElement('div');
+    titleDiv.classList.add('title');
 
-    // create red and assign it read status
-    const read = document.createElement('p');
-    pages.classList.add('read');
-    read.innerText = book.read ? 'read' : 'not read';
+    const titleh2 = document.createElement('h2');
+    titleh2.innerText = book.name;
 
-    // append them all to card
-    [title, author, pages, read].forEach(item => {
-        card.appendChild(item);
+    titleDiv.appendChild(titleh2);
+
+
+    // author name
+    const authorDiv = document.createElement('div');
+    authorDiv.classList.add('author');
+
+    const authorh3 = document.createElement('h3');
+    authorh3.innerText = book.author;
+
+    authorDiv.appendChild(authorh3);
+
+    // pages
+    const pagesDiv = document.createElement('div');
+    pagesDiv.classList.add('pages');
+
+    const pagesP = document.createElement('p');
+    pagesP.innerText = book.pages;
+
+    pagesDiv.appendChild(pagesP);
+
+    // append to info, into to card
+    [titleDiv, authorDiv, pagesDiv].forEach(item => {
+        info.appendChild(item);
     });
+    info.appendChild(card);
+
+
+    // options
+
 
     return card;
 }
