@@ -10,31 +10,34 @@
 </head>
 <body>
     <dialog class="add-book-modal">
-        
         <form autocomplete="off">
-            <div class="ipt title">
-                <input type="text" name="title" id="title" required placeholder="Title">
-            </div>
-            
-            <div class="ipt author">
-                <input type="text" name="author" id="author" placeholder="Author">
-            </div>
-            
-            <div class="ipt pages">
-                <input type="number" name="pages" id="pages" placeholder="Pages" min="0">
-            </div>
-            
-            <div class="ipt read">
-                <label for="read">Read</label>
-                <input type="checkbox" name="read" id="read" value="read">
-            </div>
-
-            <div class="ipt submit">
-                <button formmethod="dialog" type="submit" id="submit-book-btn">Submit</button>
-            </div>
-            
-            <div class="ipt cancel">
-                <button formmethod="dialog" formnovalidate id="cancel" value="Cancel">Cancel</button>
+            <div class="card">
+                <div class="info">
+                    <div class="title">
+                        <input type="text" name="title" id="title" placeholder="Book Title" required>
+                    </div>
+                    <div class="author">
+                        <input type="text" name="author" id="author" placeholder="Author Name">
+                    </div>
+                    <div class="pages">
+                        <input type="number" name="pages" id="pages" placeholder="Pages">
+                    </div>
+                    <div class="read">
+                        <input type="checkbox" name="read" id="read" value="read">
+                        <label for="read">
+                            I have read this book
+                        </label>
+                    </div>
+                </div>
+    
+                <div class="options">
+                    <div class="cancel">
+                        <button formmethod="dialog" formnovalidate id="cancel" value="Cancel">Cancel</button>
+                    </div>
+                    <div class="submit">
+                        <button formmethod="dialog" type="submit" id="submit-book-btn">Submit</button>
+                    </div>
+                </div>
             </div>
         </form>
 

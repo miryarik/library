@@ -73,7 +73,6 @@ function makeBookCard(book) {
 
     titleDiv.appendChild(titleh2);
 
-
     // author name
     const authorDiv = document.createElement('div');
     authorDiv.classList.add('author');
@@ -88,7 +87,7 @@ function makeBookCard(book) {
     pagesDiv.classList.add('pages');
 
     const pagesP = document.createElement('p');
-    pagesP.innerText = book.pages;
+    pagesP.innerText = `${book.pages} pages`;
 
     pagesDiv.appendChild(pagesP);
 
@@ -96,14 +95,40 @@ function makeBookCard(book) {
     [titleDiv, authorDiv, pagesDiv].forEach(item => {
         info.appendChild(item);
     });
-    info.appendChild(card);
+    card.appendChild(info);
 
 
     // options
+    const options = document.createElement('div');
+    options.classList.add('options');
 
+    // delete
+    const deleteDiv = document.createElement('div');
+    deleteDiv.classList.add('delete');
+    
+    const deleteBtn = document.createElement('button');
+    deleteBtn.setAttribute('id', 'delete');
+    deleteBtn.innerText = "Delete";
+    deleteDiv.appendChild(deleteBtn);
+
+    // read
+    const readDiv = document.createElement('div');
+    readDiv.classList.add('read');
+    
+    const readBtn = document.createElement('button');
+    readBtn.setAttribute('id', 'read');
+    readBtn.innerText = "Read";
+    readDiv.appendChild(readBtn);
+
+    // append to options, options to card
+    [deleteDiv, readDiv].forEach(item => {
+        options.appendChild(item);
+    });
+    card.appendChild(options);
 
     return card;
 }
+
 
 
 document.addEventListener("DOMContentLoaded", (event) => {
