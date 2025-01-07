@@ -60,6 +60,21 @@ function displayBooks() {
 }
 
 
+function toggleRead(book, readBtn) {
+    if (book.read) {
+        book.read = false;
+        readBtn.innerText = 'Unread';
+        readBtn.setAttribute('id', 'unread');
+    }
+    else {
+        book.read = true;
+        readBtn.innerText = 'Read';
+        readBtn.setAttribute('id', 'read');
+    }
+
+}
+
+
 function makeBookCard(book) {
     const card = document.createElement('div');
     card.classList.add('card');
@@ -94,7 +109,7 @@ function makeBookCard(book) {
     pagesDiv.classList.add('pages');
 
     const pagesP = document.createElement('p');
-    pagesP.innerText = `${book.pages} pages`;
+    pagesP.innerText =  book.pages == 1 ? `${book.pages} page` : `${book.pages} pages`;
 
     pagesDiv.appendChild(pagesP);
 
@@ -123,8 +138,8 @@ function makeBookCard(book) {
     readDiv.classList.add('read');
     
     const readBtn = document.createElement('button');
-    readBtn.setAttribute('id', 'read');
-    readBtn.innerText = "Read";
+    readBtn.setAttribute('id', book.read ? 'read' : 'unread');
+    readBtn.innerText = book.read ? 'Read' : 'Unread';
     readDiv.appendChild(readBtn);
 
     // append to options, options to card
@@ -134,12 +149,17 @@ function makeBookCard(book) {
     card.appendChild(options);
 
     
-    // delete button
+    // delete button behaviour
     deleteBtn.addEventListener('click', () => {
         const idx = card.getAttribute('id');
         removeBookFromLibrary(idx);
     });
     
+    // read / unread toggle behaviour
+    readBtn.addEventListener('click', () => {
+        toggleRead(book, readBtn);
+        readBtn.blur();
+    });
 
     return card;
 }
@@ -169,13 +189,16 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     // adding new book and handling form behaviour on submit
     const submitBtn = document.querySelector('#submit-book-btn');
-    submitBtn.addEventListener('click', () => {
+    submitBtn.addEventListener('click', (event) => {
+        
+        // prevent default submission behaviour
+        event.preventDefault();
+
         // get entered inputs
         let newBookTitle = addBookModal.querySelector('input#title').value;
         let newBookAuthor = addBookModal.querySelector('input#author').value;
         let newBookPages = addBookModal.querySelector('input#pages').value;
         let newBookRead = addBookModal.querySelector('input#read').checked;
-        
 
         // valid input must have title
         if (newBookTitle !== '') {

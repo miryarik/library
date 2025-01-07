@@ -9,6 +9,7 @@ html {
     --delete-clr: #EA4335;
     --read-clr: #34A853;
     --focus-blue: #4285F4;
+    --unread-clr: #ffa600;
 }
 
 body {
@@ -199,6 +200,7 @@ body {
                     border-bottom-right-radius: 10px;
 
                     background-color: var(--read-clr);
+
                     opacity: 0.5;
 
                     color: var(--text-white);
@@ -209,6 +211,10 @@ body {
                     &:focus {
                         cursor: pointer;
                         opacity: 1;
+                    }
+
+                    &#unread {
+                        background-color: var(--unread-clr);
                     }
 
                 }
