@@ -4,17 +4,20 @@ function Book(name, author, pages, read) {
     this.author = author;
     this.pages = pages;
     this.read = read;
+    this.index = function () {
+        return myLibrary.includes(this) ? myLibrary.indexOf(this) : myLibrary.length;
+    }
 
 }
 
-// sample books
-const book0 = new Book('Water', 'Katara', 199, false);
-const book1 = new Book('Air - The Element of Breath', 'Aang', 199, false);
-const book2 = new Book('Earth', 'Toph', 199, false);
-const book3 = new Book('Fire', 'Zuko', 199, false);
+let myLibrary = []
 
-// library array
-const myLibrary = [book0, book1, book2, book3];
+// sample books
+const book0 = new Book('The Legend of Korra', 'Tenzin', 199, false);
+const book1 = new Book('The Legend of Aang', 'Sokka', 199, false);
+const book2 = new Book('The Legend of Roku', 'Zoku', 199, false);
+const book3 = new Book('The Legend of Kyoshi', 'Suki', 199, false);
+
 
 // cards container div
 const cardsDiv = document.querySelector('.cards');
@@ -24,14 +27,16 @@ function addBookToLibrary(book) {
     // add book to myLibrary array
     myLibrary.push(book);
 
-    // sync display
-    displayBooks();
+    // add to display
+    const card = makeBookCard(book);
+    cardsDiv.appendChild(card);
+    
 }
 
 
-function removeBookFromLibrary(book) {
-    // add book to myLibrary array
-    myLibrary.pop(book);
+function removeBookFromLibrary(bookIndex) {
+    // remove book from myLibrary array
+    myLibrary.splice(bookIndex, 1);
     
     // sync display
     displayBooks();
@@ -58,6 +63,8 @@ function displayBooks() {
 function makeBookCard(book) {
     const card = document.createElement('div');
     card.classList.add('card');
+    card.setAttribute('id', `${book.index()}`);
+    
 
     // create info div -> title, author, p
     const info = document.createElement('div');
@@ -126,19 +133,32 @@ function makeBookCard(book) {
     });
     card.appendChild(options);
 
+    
+    // delete button
+    deleteBtn.addEventListener('click', () => {
+        const idx = card.getAttribute('id');
+        removeBookFromLibrary(idx);
+    });
+    
+
     return card;
 }
 
 
 
 document.addEventListener("DOMContentLoaded", (event) => {
+
+    // library array
+    [book0, book1, book2, book3].forEach(book => {
+        addBookToLibrary(book);
+    });
     
+    // display books from array
+    displayBooks();
+
     // modal for adding new book
     const addBookModal = document.querySelector('dialog.add-book-modal');
 
-    // display books from array
-    displayBooks();
-    
 
     // add book button
     const addBookBtn = document.querySelector('#add-book-btn');
