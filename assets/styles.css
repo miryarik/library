@@ -13,13 +13,13 @@ html {
 
 
     @media (prefers-color-scheme: light) {
-        --card-bg-clr: rgb(255, 255, 255);
-        --text-white: rgb(36, 36, 36);
+        --card-bg-clr: rgb(96, 96, 96);
+        --text-white: rgb(255, 255, 255);
         --border-white: rgb(180, 180, 180);
-        --accent-color: rgb(245, 245, 245);
-        --header-bg-clr: rgb(210, 210, 210);
+        --accent-color: rgb(147, 147, 147);
+        --header-bg-clr: rgb(55, 55, 55);
         --shadow-light: 0px 0px 3px rgb(0, 150, 255);
-        --text-secondary: rgb(109, 109, 109);
+        --text-secondary: rgb(255, 255, 255);
         --delete-clr: #EA4335;
         --read-clr: #34A853;
         --focus-blue: #4285F4;
