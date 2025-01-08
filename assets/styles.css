@@ -8,14 +8,29 @@ html {
     --text-secondary: rgb(165, 165, 165);
     --delete-clr: #EA4335;
     --read-clr: #34A853;
-    --focus-blue: #4285F4;
+    --focus-blue: var(--text-white);
     --unread-clr: #ffa600;
+
+
+    @media (prefers-color-scheme: light) {
+        --card-bg-clr: rgb(255, 255, 255);
+        --text-white: rgb(36, 36, 36);
+        --border-white: rgb(180, 180, 180);
+        --accent-color: rgb(245, 245, 245);
+        --header-bg-clr: rgb(210, 210, 210);
+        --shadow-light: 0px 0px 3px rgb(0, 150, 255);
+        --text-secondary: rgb(109, 109, 109);
+        --delete-clr: #EA4335;
+        --read-clr: #34A853;
+        --focus-blue: #4285F4;
+        --unread-clr: #ffa600;
+    }
 }
+
 
 @font-face {
     font-family: 'allerbold';
-    src: url('./aller_bd-webfont.woff2') format('woff2'),
-         url('./aller_bd-webfont.woff') format('woff');
+    src: url('./aller_bd-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -23,8 +38,7 @@ html {
 
 @font-face {
     font-family: 'allerregular';
-    src: url('./aller_rg-webfont.woff2') format('woff2'),
-         url('./aller_rg-webfont.woff') format('woff');
+    src: url('./aller_rg-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -62,8 +76,17 @@ body {
         color: var(--text-white);
         position: absolute;
         left: 14px;
-    }
 
+        display: flex;
+        gap: 5px;
+
+        & svg {
+            height: 40px;
+            width: 40px;
+            
+            fill: var(--text-white);
+        }
+    }
 
     & button {
         width: 150px;
@@ -81,7 +104,7 @@ body {
 
         &:hover,
         &:focus {
-            border-color: var(--text-white);
+            border-color: var(--focus-blue);
             box-shadow: var(--shadow-light);
             cursor: pointer;
         }
@@ -121,7 +144,7 @@ body {
 
         &:hover,
         &:focus {
-            border-color: var(--text-white);
+            border-color: var(--focus-blue);
             box-shadow: var(--shadow-light);
         }
 
@@ -187,14 +210,32 @@ body {
                     width: 100%;
                     height: 100%;
 
-                    color: var(--text-white);
+                    color: aliceblue;
 
                     font-weight: bold;
+                    font-size: 20px;
                     
                     background-color: var(--delete-clr);
                     opacity: 0.5;
 
                     border-bottom-left-radius: 10px;
+
+                    display: flex;
+                    gap: 5px;
+                    flex-direction: row-reverse;
+                    justify-content: center;
+                    align-items: center;
+                    
+
+                    & .icon > svg {
+                        fill: aliceblue;
+                        height: 35px;
+                        width: 35px;
+
+                        position: relative;
+                        top: -2px;
+
+                    }
 
                     &:hover,
                     &:focus {
@@ -222,9 +263,26 @@ body {
 
                     opacity: 0.5;
 
-                    color: var(--text-white);
+                    color: aliceblue;
 
                     font-weight: bold;
+                    font-size: 20px;
+
+                    display: flex;
+                    gap: 5px;
+                    flex-direction: row-reverse;
+                    justify-content: center;
+                    align-items: center;
+
+
+                    & .icon > svg {
+                        fill: aliceblue;
+                        height: 35px;
+                        width: 35px;
+
+                        position: relative;
+                        top: -2px;
+                    }
 
                     &:hover,
                     &:focus {
@@ -256,7 +314,7 @@ dialog.add-book-modal[open] {
 
     background-color: var(--card-bg-clr);
 
-    border: 2px solid var(--text-white);
+    border: 2px solid var(--focus-blue);
     border-radius: 14px;
 
     box-shadow: var(--shadow-light);
@@ -307,27 +365,43 @@ dialog.add-book-modal[open] {
                     
                     width: 100%;
                     font-size: 1rem;
+
+                    & > label[for="title"] {
+                        position: absolute;
+                        top: 78px;
+                        right: 40px;
+
+                        font-size: 14px;
+
+                        color: var(--text-secondary);
+                    }
+
                     
                     & > input {
                         color: var(--text-white);
-
+                        
                         background-color: var(--accent-color);
-
+                        
                         height: 70%;
                         width: 100%;
 
                         font-size: 26px;
 
                         padding: 5px 10px;
-
+                        
                         border: 2px solid var(--border-white);
                         border-radius: 12px;
-
+                        
                         outline: none;
-
+                        
                         &:focus,
                         &:hover {
                             border-color: var(--focus-blue);
+                        }
+                        
+                        &:invalid {
+                            border-color: var(--delete-clr);
+                            box-shadow: 0 0 2px var(--delete-clr);
                         }
 
                     }
@@ -402,6 +476,7 @@ dialog.add-book-modal[open] {
 
                 & .read {
                     grid-area: read;
+                    align-self: end;
                     
                     font-size: 14px;
     
@@ -418,6 +493,7 @@ dialog.add-book-modal[open] {
                     & > input {
                         width: 24px;
                         height: 24px;
+
                     }
                 }
             }
@@ -450,9 +526,22 @@ dialog.add-book-modal[open] {
 
                         border-bottom-left-radius: 10px;
     
-                        color: var(--text-white);
+                        color: aliceblue;
     
                         font-weight: bold;
+                        font-size: 20px;
+
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 5px;
+
+                        & svg {
+                            height: 35px;
+                            width: 35px;
+                            
+                            fill: aliceblue;
+                        }
                         
                         &:hover,
                         &:focus {
@@ -479,9 +568,23 @@ dialog.add-book-modal[open] {
                         background-color: var(--read-clr);
                         opacity: 0.5;
     
-                        color: var(--text-white);
+                        color: aliceblue;
     
                         font-weight: bold;
+
+                        font-size: 20px;
+
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 5px;
+
+                        & svg {
+                            height: 35px;
+                            width: 35px;
+                            
+                            fill: aliceblue;
+                        }
     
                         &:hover,
                         &:focus {

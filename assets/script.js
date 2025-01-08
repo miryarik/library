@@ -13,10 +13,7 @@ function Book(name, author, pages, read) {
 let myLibrary = []
 
 // sample books
-const book0 = new Book('The Legend of Korra', 'Tenzin', 199, false);
-const book1 = new Book('The Legend of Aang', 'Sokka', 199, false);
-const book2 = new Book('The Legend of Roku', 'Zoku', 199, false);
-const book3 = new Book('The Legend of Kyoshi', 'Suki', 199, false);
+const book0 = new Book('Welcome To Libby', 'Mir Yarik', 36, false);
 
 
 // cards container div
@@ -24,6 +21,7 @@ const cardsDiv = document.querySelector('.cards');
 
 
 function addBookToLibrary(book) {
+
     // add book to myLibrary array
     myLibrary.push(book);
 
@@ -35,6 +33,7 @@ function addBookToLibrary(book) {
 
 
 function removeBookFromLibrary(bookIndex) {
+
     // remove book from myLibrary array
     myLibrary.splice(bookIndex, 1);
     
@@ -61,16 +60,35 @@ function displayBooks() {
 
 
 function toggleRead(book, readBtn) {
+
+    const svgReadDiv = document.createElement('div');
+    svgReadDiv.classList.add('icon');
+    let readIconPath = ''
+
     if (book.read) {
         book.read = false;
         readBtn.innerText = 'Unread';
         readBtn.setAttribute('id', 'unread');
+        
+        // icon
+        readIconPath = "./assets/unread.svg";
     }
     else {
         book.read = true;
         readBtn.innerText = 'Read';
         readBtn.setAttribute('id', 'read');
+
+        // icon
+        readIconPath = "./assets/read.svg";
     }
+
+    fetch(readIconPath)
+        .then(res => res.text())
+        .then(content => {
+            svgReadDiv.innerHTML = content;
+        });
+        
+    readBtn.appendChild(svgReadDiv);
 
 }
 
@@ -133,6 +151,19 @@ function makeBookCard(book) {
     deleteBtn.innerText = "Delete";
     deleteDiv.appendChild(deleteBtn);
 
+    // delete icon
+    const svgDelDiv = document.createElement('div');
+    svgDelDiv.classList.add('icon')
+    const deleteIconPath = "./assets/delete.svg";
+    fetch(deleteIconPath)
+        .then(res => res.text())
+        .then(content => {
+            svgDelDiv.innerHTML = content;
+        });
+
+    deleteBtn.appendChild(svgDelDiv);
+
+
     // read
     const readDiv = document.createElement('div');
     readDiv.classList.add('read');
@@ -141,6 +172,18 @@ function makeBookCard(book) {
     readBtn.setAttribute('id', book.read ? 'read' : 'unread');
     readBtn.innerText = book.read ? 'Read' : 'Unread';
     readDiv.appendChild(readBtn);
+
+    // read icon
+    const svgReadDiv = document.createElement('div');
+    svgReadDiv.classList.add('icon');
+    const readIconPath = book.read ? "./assets/read.svg" : "./assets/unread.svg";
+    fetch(readIconPath)
+        .then(res => res.text())
+        .then(content => {
+            svgReadDiv.innerHTML = content;
+        });
+
+    readBtn.appendChild(svgReadDiv);
 
     // append to options, options to card
     [deleteDiv, readDiv].forEach(item => {
@@ -169,9 +212,8 @@ function makeBookCard(book) {
 document.addEventListener("DOMContentLoaded", (event) => {
 
     // library array
-    [book0, book1, book2, book3].forEach(book => {
-        addBookToLibrary(book);
-    });
+    addBookToLibrary(book0);
+    
     
     // display books from array
     displayBooks();
@@ -183,6 +225,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     // add book button
     const addBookBtn = document.querySelector('#add-book-btn');
     addBookBtn.addEventListener('click', () => {
+        addBookBtn.blur();
         addBookModal.showModal();
     });
 
@@ -214,6 +257,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
             addBookModal.close();
             addBookModal.querySelector('form').reset();
         }
+
+        submitBtn.blur();
 
     });
 
