@@ -19,7 +19,7 @@ html {
         --accent-color: rgb(147, 147, 147);
         --header-bg-clr: rgb(55, 55, 55);
         --shadow-light: 0px 0px 3px rgb(0, 150, 255);
-        --text-secondary: rgb(255, 255, 255);
+        --text-secondary: rgb(180, 180, 180);
         --delete-clr: #EA4335;
         --read-clr: #34A853;
         --focus-blue: #4285F4;
@@ -353,7 +353,7 @@ dialog.add-book-modal[open] {
         & .card {
             --focus-blue: #4285F4;
 
-            background-color: var(--card-bg-clr);
+            background-color: var(--header-bg-clr);
 
             width: 100%;
             height: 100%;
@@ -402,7 +402,7 @@ dialog.add-book-modal[open] {
                     & > input {
                         color: var(--text-white);
                         
-                        background-color: var(--accent-color);
+                        background-color: var(--card-bg-clr);
                         
                         height: 70%;
                         width: 100%;
@@ -440,7 +440,7 @@ dialog.add-book-modal[open] {
                     & > input {
                         color: var(--text-white);
 
-                        background-color: var(--accent-color);
+                        background-color: var(--card-bg-clr);
 
                         height: 70%;
                         width: 100%;
@@ -474,7 +474,7 @@ dialog.add-book-modal[open] {
                     & > input {
                         color: var(--text-white);
 
-                        background-color: var(--accent-color);
+                        background-color: var(--card-bg-clr);
 
                         height: 100%;
                         width: 50%;
