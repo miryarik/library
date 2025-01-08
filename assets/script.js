@@ -127,6 +127,7 @@ function makeBookCard(book) {
     pagesDiv.classList.add('pages');
 
     const pagesP = document.createElement('p');
+    book.pages = book.pages < 99999999 && book.pages > -1 ? book.pages : 0; 
     pagesP.innerText =  book.pages == 1 ? `${book.pages} page` : `${book.pages} pages`;
 
     pagesDiv.appendChild(pagesP);
