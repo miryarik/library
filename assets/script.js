@@ -230,13 +230,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
         addBookModal.showModal();
     });
 
-
-    // adding new book and handling form behaviour on submit
-    const submitBtn = document.querySelector('#submit-book-btn');
-    submitBtn.addEventListener('click', (event) => {
-        
-        // prevent default submission behaviour
-        event.preventDefault();
+    function handleModalSubmit() {
+        // handle new book form submt
 
         // get entered inputs
         let newBookTitle = addBookModal.querySelector('input#title').value;
@@ -245,7 +240,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         let newBookRead = addBookModal.querySelector('input#read').checked;
 
         // valid input must have title
-        if (newBookTitle !== '') {
+        if (newBookTitle) {
 
             // handle pages input
             newBookPages = newBookPages == 0 ? 0 : newBookPages;
@@ -260,7 +255,25 @@ document.addEventListener("DOMContentLoaded", (event) => {
         }
 
         submitBtn.blur();
+    }
 
+    // adding new book and handling form behaviour on submit
+    const submitBtn = document.querySelector('#submit-book-btn');
+    submitBtn.addEventListener('click', (event) => {
+        
+        // prevent default submission behaviour
+        event.preventDefault();
+
+        handleModalSubmit();
+
+    });
+
+    // enter submits form
+    addBookModal.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter' && title) {
+            event.preventDefault();
+            handleModalSubmit();
+        }
     });
 
 
