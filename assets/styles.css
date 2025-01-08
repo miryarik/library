@@ -71,11 +71,14 @@ body {
     top: 0;
 
     z-index: 3;
+
+    padding: 0 24px;
+
+    display: flex;
+    justify-content: space-between;
     
     & h1 {
         color: var(--text-white);
-        position: absolute;
-        left: 14px;
 
         display: flex;
         gap: 5px;
