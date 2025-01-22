@@ -1,13 +1,15 @@
-function Book(name, author, pages, read) {
-    // book constructor
-    this.name = name;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-    this.index = function () {
-        return myLibrary.includes(this) ? myLibrary.indexOf(this) : myLibrary.length;
+class Book {
+
+    constructor(name, author, pages, read) {
+        this.name = name;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
     }
 
+    index = () => {
+        return myLibrary.includes(this) ? myLibrary.indexOf(this) : myLibrary.length;
+    }
 }
 
 let myLibrary = []
