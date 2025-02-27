@@ -230,13 +230,61 @@ document.addEventListener("DOMContentLoaded", (event) => {
     }
 
     // adding new book and handling form behaviour on submit
+    // and set validity on input change
+    const title = addBookModal.querySelector("input#title");
+    const author = addBookModal.querySelector("input#author");
+    const pages = addBookModal.querySelector("input#pages");
+    const read = addBookModal.querySelector("input#read");
+
     const submitBtn = document.querySelector("#submit-book-btn");
     submitBtn.addEventListener("click", (event) => {
         // prevent default submission behaviour
         event.preventDefault();
 
-        handleModalSubmit();
+
+        if (validateForm()) {
+            handleModalSubmit();
+        }
+
+        function validateForm() {
+            if (!title.value.trim()) {
+                title.setCustomValidity("Title is required");
+                title.reportValidity();
+                return false;
+
+            }
+            else if (!author.value.trim()) {
+                author.setCustomValidity("Author is required");
+                author.reportValidity();
+                return false;
+            }
+            else if (!pages.value || isNaN(pages.value || (parseInt(pages.value) < 0))) {
+                pages.setCustomValidity("Enter a valid number of pages");
+                pages.reportValidity();
+            }
+            else {
+                title.setCustomValidity("");
+                author.setCustomValidity("");
+                pages.setCustomValidity("");
+                return true;
+            }
+        }
+
     });
+
+    // input change should set validity
+    title.addEventListener("input", () => {
+        title.setCustomValidity("");
+    });
+
+    author.addEventListener("input", () => {
+        author.setCustomValidity("");
+    });
+
+    pages.addEventListener("input", () => {
+        pages.setCustomValidity("");
+    });
+    
 
     // enter submits form
     addBookModal.addEventListener("keypress", (event) => {
